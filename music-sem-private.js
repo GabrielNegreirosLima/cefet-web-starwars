@@ -240,4 +240,3 @@ let player = new AudioPlayer()
 export function play({audioUrl, coverImageUrl, title, artist}, parentEl) {
   player.start({audioUrl, coverImageUrl, title, artist}, parentEl)
 }
-
