@@ -5,6 +5,7 @@
 //  - Quando um filme for clicado, exibir sua introdução
 import { play } from "./music-sem-private.js";
 import { toRoman } from "./roman.js";
+import { restartAnimation } from "./restart-animation.js";
 
 const API_ENDPOINT = 'https://swapi.dev/api'
 
@@ -32,8 +33,21 @@ filmes.innerHTML = "";
         const romanLetter = toRoman(element.episode_id);
         const episode = `Episode ${romanLetter}`.padEnd(12, " ");
         const title = `- ${element.title}`;
+        const introEl = document.querySelector("pre.introducao");
+        const intro = element.opening_crawl;
 
         filmeEl.innerHTML = episode + title;
+
+        filmeEl.addEventListener("click", e => {
+            introEl.innerHTML = 
+            `
+            Episode ${romanLetter}
+            ${title.toUpperCase()}
+            
+            ${intro}
+            `
+            restartAnimation(introEl);
+        })
         filmes.appendChild(filmeEl);
     });
 })();
